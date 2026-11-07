@@ -65,5 +65,5 @@ public class WheatHarvesterEntity extends BaseHomesteadBoss {
     @Override protected SoundEvent getAmbientSound() { return SoundEvents.HUSK_AMBIENT; }
     @Override protected SoundEvent getHurtSound(DamageSource source) { return SoundEvents.HUSK_HURT; }
     @Override protected SoundEvent getDeathSound() { return SoundEvents.HUSK_DEATH; }
-    @Override protected float getVoicePitch() { return 0.65F; }
+    @Override public float getVoicePitch() { return 0.65F; }
 }
