@@ -1,0 +1,11 @@
+{
+  "entity.homesteadbosses.pumpkin_king": "The Pumpkin King",
+  "entity.homesteadbosses.bakers_bane": "Baker's Bane",
+  "entity.homesteadbosses.wheat_harvester": "The Wheat Harvester",
+  "entity.homesteadbosses.pumpkin_minion": "Pumpkin Minion",
+  "item.homesteadbosses.pumpkin_king_spawn_egg": "Pumpkin King Spawn Egg",
+  "item.homesteadbosses.bakers_bane_spawn_egg": "Baker's Bane Spawn Egg",
+  "item.homesteadbosses.wheat_harvester_spawn_egg": "Wheat Harvester Spawn Egg",
+  "message.homesteadbosses.spawn": "%s has awoken!",
+  "message.homesteadbosses.defeat": "%s has been defeated!"
+}

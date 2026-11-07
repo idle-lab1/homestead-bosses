@@ -1,0 +1,30 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+group = 'net.homestead'
+version = '1.0.0'
+base { archivesName = 'homesteadbosses' }
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    copyIdeResources = true
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.console.level', 'info'
+            mods { homesteadbosses { source sourceSets.main } }
+        }
+        client {}
+        server { args '--nogui' }
+    }
+}
+repositories {}
+dependencies { minecraft 'net.minecraftforge:forge:1.20.1-47.3.0' }
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [minecraft_version: '1.20.1', forge_version: '47.3.0', mod_id: 'homesteadbosses', mod_name: 'Homestead Bosses', mod_license: 'MIT', mod_version: project.version]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) { expand replaceProperties }
+}
