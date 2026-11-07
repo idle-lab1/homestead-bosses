@@ -5,7 +5,7 @@ import net.homestead.bosses.client.BossRenderers;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -38,7 +38,7 @@ public class HomesteadBosses {
     public static final RegistryObject<Item> WHEAT_HARVESTER_EGG = egg("wheat_harvester_spawn_egg", WHEAT_HARVESTER, 0xD7B64A, 0x4F6530);
 
     private static RegistryObject<Item> egg(String name, RegistryObject<? extends EntityType<? extends net.minecraft.world.entity.Mob>> type, int base, int spots) {
-        return ITEMS.register(name, () -> new SpawnEggItem(type, base, spots, new Item.Properties()));
+        return ITEMS.register(name, () -> new ForgeSpawnEggItem(type, base, spots, new Item.Properties()));
     }
 
     public HomesteadBosses() {
