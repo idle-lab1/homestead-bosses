@@ -37,5 +37,5 @@ public class PumpkinMinionEntity extends Monster {
     @Override protected SoundEvent getAmbientSound() { return SoundEvents.ZOMBIE_AMBIENT; }
     @Override protected SoundEvent getHurtSound(DamageSource source) { return SoundEvents.ZOMBIE_HURT; }
     @Override protected SoundEvent getDeathSound() { return SoundEvents.ZOMBIE_DEATH; }
-    @Override protected float getVoicePitch() { return 1.5F; }
+    @Override public float getVoicePitch() { return 1.5F; }
 }
