@@ -61,5 +61,5 @@ public class PumpkinKingEntity extends BaseHomesteadBoss {
     @Override protected SoundEvent getAmbientSound() { return SoundEvents.BLAZE_AMBIENT; }
     @Override protected SoundEvent getHurtSound(DamageSource source) { return SoundEvents.BLAZE_HURT; }
     @Override protected SoundEvent getDeathSound() { return SoundEvents.BLAZE_DEATH; }
-    @Override protected float getVoicePitch() { return 0.75F; }
+    @Override public float getVoicePitch() { return 0.75F; }
 }
