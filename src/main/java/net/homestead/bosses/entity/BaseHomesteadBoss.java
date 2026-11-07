@@ -1,5 +1,6 @@
 package net.homestead.bosses.entity;
 
+import net.homestead.bosses.HomesteadBosses;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
@@ -18,6 +19,9 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 /**
  * Shared behaviour for every named Homestead boss: a tracked boss bar, and the handful of
@@ -27,6 +31,7 @@ import net.minecraft.world.level.Level;
  * Pumpkin Minions do NOT extend this class: they're meant to behave like ordinary disposable
  * reinforcements, not boss-tier mobs.
  */
+@Mod.EventBusSubscriber(modid = HomesteadBosses.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public abstract class BaseHomesteadBoss extends Monster {
     protected final ServerBossEvent bossEvent;
     private boolean announcedSpawn = false;
@@ -72,9 +77,18 @@ public abstract class BaseHomesteadBoss extends Monster {
         return effectInstance.getEffect() != MobEffects.WITHER && super.canBeAffected(effectInstance);
     }
 
-    @Override public void onAddedToLevel() {
-        super.onAddedToLevel();
-        if (!level().isClientSide && !announcedSpawn) {
+    // There's no overridable "I was just added to the level" method on Entity in vanilla,
+    // so this is done the Forge way: listen for the event every entity fires when it joins
+    // a level, and only act on it when the entity involved is one of our bosses.
+    @SubscribeEvent
+    public static void onJoinLevel(EntityJoinLevelEvent event) {
+        if (!event.getLevel().isClientSide && event.getEntity() instanceof BaseHomesteadBoss boss) {
+            boss.announceSpawnOnce();
+        }
+    }
+
+    private void announceSpawnOnce() {
+        if (!announcedSpawn) {
             announcedSpawn = true;
             broadcast(Component.translatable("message.homesteadbosses.spawn", getDisplayName()));
         }
